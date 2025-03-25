@@ -4,6 +4,15 @@ import numpy as np
 import pickle
 import spacy
 
+import spacy
+try:
+    nlp = spacy.load("en_core_web_sm")
+except:
+    import os
+    os.system("python -m spacy download en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
+
+
 # Load model and data
 model = pickle.load(open("model.pkl", "rb"))
 symptoms = list(pd.read_csv("Training.csv").columns[:-1])
