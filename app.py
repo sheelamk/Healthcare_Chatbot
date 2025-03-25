@@ -3,20 +3,18 @@ import pandas as pd
 import numpy as np
 import pickle
 import spacy
+from spacy.cli import download
 
-import spacy
+# Load spaCy model with fallback download
 try:
     nlp = spacy.load("en_core_web_sm")
-except:
-    import os
-    os.system("python -m spacy download en_core_web_sm")
+except OSError:
+    download("en_core_web_sm")
     nlp = spacy.load("en_core_web_sm")
 
-
-# Load model and data
+# Load your ML model and symptoms list
 model = pickle.load(open("model.pkl", "rb"))
 symptoms = list(pd.read_csv("Training.csv").columns[:-1])
-nlp = spacy.load("en_core_web_sm")
 
 # Intent keywords for basic rule-based detection
 intent_keywords = {
@@ -35,15 +33,10 @@ def detect_intent(text):
                 return intent
     return "unknown"
 
-# Streamlit app starts here
-#st.title("🩺 AI HealthBot - Enhanced Chatbot")
-#st.write("Chat with a simple AI health assistant to check symptoms, book appointments, or ask general health questions.")
-
-# Streamlit UI
+# Streamlit UI setup
 st.set_page_config(page_title="AI HealthBot - Enhanced Chatbot", page_icon="🩺")
 st.title("🩺 AI HealthBot - Enhanced Chatbot")
 st.write("Talk to me about your symptoms, appointments, or general health questions!")
-
 
 # Session state to remember previous intent
 if "last_intent" not in st.session_state:
