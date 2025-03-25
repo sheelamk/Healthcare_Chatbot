@@ -16,15 +16,16 @@ git clone https://github.com/yourusername/healthcare-chatbot.git
 cd healthcare-chatbot
 pip install -r requirements.txt
 streamlit run app.py
-Features
 
+Features
 Symptom checker using NLP
 Health tips based on user inputs
 24/7 automated chat support
-Goals / Future Plans
 
-Helps show your vision:
+Goals / Future Plans
 Integrate with real-time medical APIs
 Add voice-based interaction
 Expand to cover mental health and chronic conditions
-Dataset Disease Prediction Dataset from Kaggle
+
+Dataset 
+Disease Prediction Dataset from Kaggle
